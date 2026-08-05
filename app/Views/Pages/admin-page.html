@@ -1,0 +1,67 @@
+<link rel="stylesheet" href="../Styles/admin-styles.css">
+
+<h2>Página do administrador</h2>
+<body>
+   <table>
+      <tr>
+         <th>Adicionar novo usuário</th>
+         <th>Adicionar novo cargo</th>
+      </tr>
+
+      <tr>
+         <td>
+            <form action="/app/Controllers/admin-controller">
+               <label>
+                  Usuario:
+               </label>
+               <input type="text" name="user" required>
+
+               <br>
+
+               <label>
+                  Email: 
+               </label>
+               <input type="email" name="email" required>
+
+               <br>
+
+               <label>
+                  Cargo: 
+               </label>
+               <input type="text" name="position_interprise" required>
+
+               <br>
+
+               <label>
+                  Senha: 
+               </label>
+               <input type="password" name="password" required>
+
+               <br>
+
+               <label>
+                  Palavra chave (não obrigatório): 
+               </label>
+               <input type="text" name="salt">
+
+               <br>
+
+               <button type="submit">Criar</button>
+            </form>
+         </td>
+
+         <td>
+            <form action="/app/Controllers/admin-controller" method='POST'>
+               <label>
+                  Nome do cargo: 
+               </label>
+               <input type="text" required>
+
+               <br>
+
+               <button type="submit"> Criar </button>
+            </form>
+         </td>
+      </tr>
+   </table>
+</body>

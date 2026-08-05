@@ -1,0 +1,67 @@
+<link rel="stylesheet" href="../Styles/home-styles.css">
+
+<body>
+   <table>
+
+      <tr>
+         <th>Querys disponíveis</th>
+         <th>Adicionar query</th>
+      </tr>
+
+      <tr>
+         <td></td>
+
+         <td>
+            <form action="" method='POST'>
+               <label>
+                  Nome:
+               </label>
+               <input type="text" name="name" required>
+
+               <br>
+                  
+               <label>
+                  Arquivo:
+               </label>
+               <input type="file" name="file_query">
+
+               <br>
+
+               <label>
+                  Texto da query:
+               </label>
+               <input type="text" name="content">
+
+               <br>
+
+               <label>
+                  Descrição (o que retorna):
+               </label>
+               <input type="text" name="description" required>
+
+               <br>
+
+               <label>
+                  Todos podem visualizar o arquivo ? (caso não, apenas usuarios do mesmo cargo/area poderão visualizar):
+               </label>
+               <select name="public_view">
+                  <option value="sim">Sim</option>
+                  <option value="nao">Não</option>
+               </select>
+
+               <br>
+
+               <label>
+                  Código do chamado:
+               </label>
+               <select name="referred">
+                  <option value="hdk">HDK</option>
+                  <option value="esus">ESUS</option>
+               </select>
+               <input type="number" name="code">
+            </form>
+         </td>
+      </tr>
+
+   </table>
+</body>
