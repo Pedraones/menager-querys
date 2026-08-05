@@ -8,7 +8,7 @@ use const app\Models\secrets\PASSWORD;
 use const app\Models\secrets\HOST;
 use const app\Models\secrets\TABLE;
 
-class adminPosition{
+class adminModel{
 
    public function addPosition($name){
       $db = new mysqli(
