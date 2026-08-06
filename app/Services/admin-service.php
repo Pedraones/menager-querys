@@ -1,23 +1,23 @@
 <?php
 
+$dir_root = getenv('dir_menager_querys');
+require_once $dir_root . "app/helpers/avoid-idempotence.php";
+require_once $dir_root . "app/Models/admin-model.php";
+
 class adminService{
-   public static $quantity_same_request = 0;
+   public function insertPosition($params): bool{
+      if(prevent_idempotence($params) == true) return false;
+         
+      $adminModel = new adminModel();
 
-   public static function limit($params): boolean{
-      if(self::$quantity_same_request > 5){
-         self::$quantity_same_request = 0;
-         return true;
-      }
+      $position = $params["name"];
+      $existPosition = $adminModel->getPosition($position);
 
-      if($params["value_request"] != $params["value_old"]){
-         self::$quantity_same_request = 1;
-         return false;
-      }
+      if($existPosition == true) return false;
 
-      if($params["value_request"] == $params["value_old"]){
-         self::$quantity_same_request++;
-         return false;
-      }
+      $adminModel->addPosition($position);
+      
+      return true;
    }
 }
 
