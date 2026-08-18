@@ -13,7 +13,8 @@ class adminController{
 
       $result = [
          "success" => true,
-         "data" => $params[0]["name"]
+         "newData" => $params[0]["name"],
+         "oldData" => $params[0]["oldData"]
       ];
 
       return $result;
