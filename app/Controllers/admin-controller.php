@@ -1,7 +1,6 @@
 <?php
 $dir_root = getenv('dir_menager_querys');
 
-require_once $dir_root . 'app/Services/admin-service.php'; 
 require_once $dir_root . 'app/helpers/verifications.php';
 require_once $dir_root . 'app/helpers/hash.php';
 
