@@ -1,15 +1,11 @@
 <?php
 
 class Verifications{
-   public function receivedAllParamsToAddPosition(...$params){
-      if(gettype($params[0]["name"]) == "string" && $params[0]["name"] != "") echo "true";
+   public function receivedAllParamsToAddPosition(...$params): bool{
+      if(gettype($params[0]["name"]) == "string" && $params[0]["name"] != "") return true;
 
-      echo "false";
+      return false;
    }
 }
 
-$teste = new Verifications();
-$teste->receivedAllParamsToAddPosition([
-   "name" => "1"
-]);
 ?>
