@@ -8,12 +8,13 @@
       $result = hash(ALGORITHM, $brute_text);
 
       unset($params);
-      var_dump($result);
+      
       return $result;
    }
 
-   $test = encrypt([
-      "password" => "pokrv",
-      "salt" => "prv"
-   ]);
+   function compareHash(...$params): bool{
+      $hash = encrypt($params[0]);
+      echo "<br> ";
+      return hash_equals($hash, $params[0]["hash"]);
+   }
 ?>
