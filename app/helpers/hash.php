@@ -14,7 +14,7 @@
 
    function compareHash(...$params): bool{
       $hash = encrypt($params[0]);
-      echo "<br> ";
+      
       return hash_equals($hash, $params[0]["hash"]);
    }
 ?>
