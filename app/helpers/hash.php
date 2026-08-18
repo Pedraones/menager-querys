@@ -4,11 +4,18 @@
 
    function encrypt(...$params): string{
       $datas = $params[0];
-      $brute_text = $datas["password"] . $datas["salt"];
+      $brute_text = "";
+
+      foreach($datas as $key => $value){
+         if($key != "hash") {
+            $brute_text = $brute_text . $value;
+         }
+      }
+
       $result = hash(ALGORITHM, $brute_text);
 
       unset($params);
-      
+
       return $result;
    }
 
@@ -17,4 +24,5 @@
       
       return hash_equals($hash, $params[0]["hash"]);
    }
+
 ?>
