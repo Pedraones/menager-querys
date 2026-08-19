@@ -10,7 +10,7 @@ class adminService{
          
       $adminModel = new adminModel();
 
-      $position = $params["name"];
+      $position = $params["newData"];
       $existPosition = $adminModel->getPosition($position);
 
       if($existPosition == true) return false;
