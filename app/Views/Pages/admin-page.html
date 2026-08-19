@@ -51,13 +51,15 @@
          </td>
 
          <td>
-            <form action="/app/Controllers/admin-controller" method='POST'>
+            <form action="admin-page.php" method='POST'>
                <label>
                   Nome do cargo: 
                </label>
-               <input type="text" required>
+               <input type="text" name="name" required>
 
                <br>
+
+               <input type="hidden" name="action" value="addPosition">
 
                <button type="submit"> Criar </button>
             </form>
