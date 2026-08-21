@@ -20,7 +20,7 @@ class Verifications{
       if($params[0]["password"] == NULL ||
          $params[0]["password"] == "") return false;
 
-      if($params[0]["salt"] == NULL ||
+      if($params[0]["salt"] != NULL &&
          $params[0]["salt"] == "") return false;
 
       return true;
