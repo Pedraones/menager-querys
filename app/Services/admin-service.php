@@ -40,8 +40,16 @@ class adminService{
       $existUser = $adminModel->getUser($params["newDatas"]);
       if($existUser == true) return false;
 
+      $textPasswordToEncrypt = [
+         "password" = $params["newDatas"]["password"],
+         "salt" = $params["newDatas"]["salt"]
+      ];
+
+      $params["newDatas"]["passowrd"] = encrypt($textPasswordToEncrypt);
       $adminModel->addUser($params["newDatas"]);
 
+      unset($params);
+      unset($textPasswordToEncrypt);
       unset($adminModel);
 
       return true;
