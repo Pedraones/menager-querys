@@ -8,20 +8,25 @@ class Verifications{
    }
 
    public function receivedAllParamsToAddUser(...$params): bool{
-      if($params[0]["user"] == NULL ||
-         $params[0]["user"] == "") return false;
+      if($params[0]["newDatas"] == NULL ||
+         $params[0]["newDatas"] == []) return false;
 
-      if($params[0]["email"] == NULL ||
-         $params[0]["email"] == "") return false;
+      $values = $params[0]["newDatas"];
 
-      if($params[0]["position_interprise"] == NULL ||
-         $params[0]["position_interprise"] == "") return false;
+      if($values[0]["user"] == NULL ||
+         $values[0]["user"] == "") return false;
 
-      if($params[0]["password"] == NULL ||
-         $params[0]["password"] == "") return false;
+      if($values[0]["email"] == NULL ||
+         $values[0]["email"] == "") return false;
 
-      if($params[0]["salt"] != NULL &&
-         $params[0]["salt"] == "") return false;
+      if($values[0]["position_interprise"] == NULL ||
+         $values[0]["position_interprise"] == "") return false;
+
+      if($values[0]["password"] == NULL ||
+         $values[0]["password"] == "") return false;
+
+      if($values[0]["salt"] != NULL &&
+         $values[0]["salt"] == "") return false;
 
       return true;
    }
