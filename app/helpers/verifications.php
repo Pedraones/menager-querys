@@ -7,7 +7,7 @@ class Verifications{
       return false;
    }
 
-   public function receivedAllParamsToAddPosition(...$params): bool{
+   public function receivedAllParamsToAddUser(...$params): bool{
       if($params[0]["user"] == "") return false;
       if($params[0]["email"] == "") return false;
       if($params[0]["position_interprise"] == "") return false;
