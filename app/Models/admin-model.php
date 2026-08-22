@@ -85,5 +85,37 @@ class adminModel{
 
       return true;
    }
+
+   public function addUser($user){
+      $db = new mysqli(
+         HOST,
+         USER,
+         PASSWORD,
+         DB,
+         PORT
+      );
+
+      $building_query = $db->prepare(
+         "INSERT INTO " . TABLE_USER . " 
+         (name, email, salt, password, id_position_interprise) 
+         VALUES (?, ?, ?, ?, ?)"
+      );
+      
+      $building_query->bind_param(
+         "ssssi", 
+         $user["name"], 
+         $user["email"], 
+         $user["password"], 
+         $user["salt"], 
+         $user["id_position_interprise"]
+      );
+      $building_query->execute();
+
+      $db->close();
+
+      unset($building_query);
+      unset($db);
+      unset($user);
+   }
 }
 ?>
