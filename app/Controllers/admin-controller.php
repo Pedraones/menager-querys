@@ -25,11 +25,11 @@ class adminController{
 
       $allParamsBeenReceived = $verify->receivedAllParamsToAddUser($params[0]);
 
-      if($allParamsBeenReceived == false) return ["success" => false;
+      if($allParamsBeenReceived == false) return ["success" => false];
 
       $values = [
-         "newDatas" = $params[0]["newDatas"], 
-         "oldDatas" = $params[0]["oldData"]
+         "newDatas" => $params[0]["newDatas"], 
+         "oldDatas" => $params[0]["oldData"]
       ];
 
       unset($params);
@@ -37,4 +37,5 @@ class adminController{
       return $values;
    }
 }
+
 ?>
