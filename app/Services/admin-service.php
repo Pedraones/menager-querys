@@ -21,9 +21,9 @@ class adminService{
       return true;
    }
 
-   public function insertUser($params): bool{
+   public function insertUser($params){
       $secret = encrypt($params["newDatas"]);
-
+      
       $valuesToIdentifieIdempotence = [
          "newDatas" => $secret,
          "oldDatas" => $params["oldDatas"]
@@ -38,14 +38,18 @@ class adminService{
       $adminModel = new adminModel();
 
       $existUser = $adminModel->getUser($params["newDatas"]);
+
       if($existUser == true) return false;
 
       $textPasswordToEncrypt = [
          "password" => $params["newDatas"]["password"],
          "salt" => $params["newDatas"]["salt"]
       ];
+      
+      
+      $params["newDatas"]["password"] = encrypt($textPasswordToEncrypt);
 
-      $params["newDatas"]["passowrd"] = encrypt($textPasswordToEncrypt);
+
       $adminModel->addUser($params["newDatas"]);
 
       unset($params);
