@@ -75,9 +75,22 @@ class adminModel{
       ";     
       $query = $query . $conditions;
 
-      $result = $db->execute_query($query, $user);
-      
+      $result = $db->execute_query(
+         $query, [
+            $user["name"], 
+            $user["email"], 
+            $user["password"], 
+            $user["id_position_interprise"]
+         ]
+      );
+
+      var_dump($result);
+
+      #echo "<br>";
+
       foreach($result as $row){
+         var_dump($row);
+         echo "<br>";
          foreach($row as $value){
             if($value == NULL || $value == "") return false;
          }
@@ -97,7 +110,7 @@ class adminModel{
 
       $building_query = $db->prepare(
          "INSERT INTO " . TABLE_USER . " 
-         (name, email, salt, password, id_position_interprise) 
+         (name, email, password, salt, id_position_interprise) 
          VALUES (?, ?, ?, ?, ?)"
       );
       
