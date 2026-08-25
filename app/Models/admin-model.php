@@ -62,15 +62,13 @@ class adminModel{
       $query = "
          SELECT 
             name, 
-            email, 
-            password, 
+            email,  
             id_position_interprise 
          FROM " . TABLE_USER;
 
       $conditions = " 
          WHERE name = ?
          AND   email = ?
-         AND   password = ?
          AND id_position_interprise = ?
       ";     
       $query = $query . $conditions;
@@ -78,8 +76,7 @@ class adminModel{
       $result = $db->execute_query(
          $query, [
             $user["name"], 
-            $user["email"], 
-            $user["password"], 
+            $user["email"],  
             $user["id_position_interprise"]
          ]
       );
