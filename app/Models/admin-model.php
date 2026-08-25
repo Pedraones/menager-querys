@@ -88,13 +88,7 @@ class adminModel{
 
       #echo "<br>";
 
-      foreach($result as $row){
-         var_dump($row);
-         echo "<br>";
-         foreach($row as $value){
-            if($value == NULL || $value == "") return false;
-         }
-      }
+      if($result->num_rows == 0) return false;
 
       return true;
    }
@@ -131,4 +125,17 @@ class adminModel{
       unset($user);
    }
 }
+
+$teste = new adminModel();
+$result = $teste->getUsers(
+   [
+    'name'                   => 'João Silva',
+    'email'                  => 'joao.silva@empresa.com',
+    'password'               => '$2y$10$e8N3...hash_da_senha',
+    'id_position_interprise' => 5
+]
+);
+
+var_dump($result);
+
 ?>
