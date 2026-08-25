@@ -50,7 +50,7 @@ class adminModel{
       return false;
    }
 
-   public function getUsers($user): bool{
+   public function getUser($user): bool{
       $db = new mysqli(
          HOST,
          USER,
@@ -83,10 +83,6 @@ class adminModel{
             $user["id_position_interprise"]
          ]
       );
-
-      var_dump($result);
-
-      #echo "<br>";
 
       if($result->num_rows == 0) return false;
 
@@ -125,17 +121,5 @@ class adminModel{
       unset($user);
    }
 }
-
-$teste = new adminModel();
-$result = $teste->getUsers(
-   [
-    'name'                   => 'João Silva',
-    'email'                  => 'joao.silva@empresa.com',
-    'password'               => '$2y$10$e8N3...hash_da_senha',
-    'id_position_interprise' => 5
-]
-);
-
-var_dump($result);
 
 ?>
