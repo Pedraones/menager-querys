@@ -34,7 +34,7 @@ class adminController{
 
       unset($params);
 
-      return $result;
+      return $values;
    }
 }
 ?>
