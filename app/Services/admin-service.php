@@ -2,7 +2,7 @@
 
 $dir_root = getenv('dir_menager_querys');
 require_once $dir_root . "app/helpers/ensure-idempotence.php";
-require_once $dir_root . "app/helper/hash.php"
+require_once $dir_root . "app/helpers/hash.php";
 require_once $dir_root . "app/Models/admin-model.php";
 
 class adminService{
@@ -25,8 +25,8 @@ class adminService{
       $secret = encrypt($params["newDatas"]);
 
       $valuesToIdentifieIdempotence = [
-         "newDatas" = $secret,
-         "oldDatas" = $params["oldDatas"]
+         "newDatas" => $secret,
+         "oldDatas" => $params["oldDatas"]
       ];
 
       $isIdempotence = ensureIdempotence($valuesToIdentifieIdempotence);
@@ -41,8 +41,8 @@ class adminService{
       if($existUser == true) return false;
 
       $textPasswordToEncrypt = [
-         "password" = $params["newDatas"]["password"],
-         "salt" = $params["newDatas"]["salt"]
+         "password" => $params["newDatas"]["password"],
+         "salt" => $params["newDatas"]["salt"]
       ];
 
       $params["newDatas"]["passowrd"] = encrypt($textPasswordToEncrypt);
@@ -55,5 +55,4 @@ class adminService{
       return true;
    }
 }
-
 ?>
