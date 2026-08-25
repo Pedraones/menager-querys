@@ -32,9 +32,6 @@ class Routes{
 
       $responseAdminController = $adminController->receiveParamsAddUser($user);
 
-      var_dump($responseAdminController);
-      echo "<br> <br> <br>";
-
       if($responseAdminController["success"] == false) return false;
       
       unset($adminController);
@@ -42,7 +39,7 @@ class Routes{
       $adminService = new adminService();
 
       $responseAdminService = $adminService->insertUser($user);
-      #var_dump($responseAdminService);
+      
       if($responseAdminService == false) return false;
 
       unset($user);
