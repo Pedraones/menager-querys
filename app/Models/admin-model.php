@@ -6,10 +6,10 @@ use const app\Models\secrets\PORT;
 use const app\Models\secrets\USER;
 use const app\Models\secrets\PASSWORD;
 use const app\Models\secrets\HOST;
-use const app\Models\secrets\TABLE;
+use const app\Models\secrets\TABLE_POSITION;
+use const app\Models\secrets\TABLE_USER;
 
 class adminModel{
-
    public function addPosition($name){
       $db = new mysqli(
          HOST,
@@ -19,7 +19,7 @@ class adminModel{
          PORT
       );
 
-      $building_query = $db->prepare("INSERT INTO " . TABLE . " (name) VALUES (?)");
+      $building_query = $db->prepare("INSERT INTO " . TABLE_POSITION . " (name) VALUES (?)");
       $building_query->bind_param("s", $name);
       $building_query->execute();
 
@@ -35,7 +35,7 @@ class adminModel{
          PORT
       );
 
-      $query = "SELECT name FROM " . TABLE . " WHERE name = ?";
+      $query = "SELECT name FROM " . TABLE_POSITION . " WHERE name = ?";
       
       $result = $db->execute_query($query, [$position]);
 
@@ -49,5 +49,74 @@ class adminModel{
 
       return false;
    }
+
+   public function getUser($user): bool{
+      $db = new mysqli(
+         HOST,
+         USER,
+         PASSWORD,
+         DB,
+         PORT
+      );
+      
+      $query = "
+         SELECT 
+            name, 
+            email,  
+            id_position_interprise 
+         FROM " . TABLE_USER;
+
+      $conditions = " 
+         WHERE name = ?
+         AND   email = ?
+         AND id_position_interprise = ?
+      ";     
+      $query = $query . $conditions;
+
+      $result = $db->execute_query(
+         $query, [
+            $user["name"], 
+            $user["email"],  
+            $user["id_position_interprise"]
+         ]
+      );
+
+      if($result->num_rows == 0) return false;
+
+      return true;
+   }
+
+   public function addUser($user){
+      $db = new mysqli(
+         HOST,
+         USER,
+         PASSWORD,
+         DB,
+         PORT
+      );
+
+      $building_query = $db->prepare(
+         "INSERT INTO " . TABLE_USER . " 
+         (name, email, password, salt, id_position_interprise) 
+         VALUES (?, ?, ?, ?, ?)"
+      );
+      
+      $building_query->bind_param(
+         "ssssi", 
+         $user["name"], 
+         $user["email"], 
+         $user["password"], 
+         $user["salt"], 
+         $user["id_position_interprise"]
+      );
+      $building_query->execute();
+
+      $db->close();
+
+      unset($building_query);
+      unset($db);
+      unset($user);
+   }
 }
+
 ?>

@@ -19,5 +19,23 @@ class adminController{
 
       return $result;
    }
+
+   public function receiveParamsAddUser(...$params): array{
+      $verify = new Verifications();
+
+      $allParamsBeenReceived = $verify->receivedAllParamsToAddUser($params[0]);
+
+      if($allParamsBeenReceived == false) return ["success" => false];
+
+      $values = [
+         "newDatas" => $params[0]["newDatas"], 
+         "oldDatas" => $params[0]["oldData"]
+      ];
+
+      unset($params);
+
+      return $values;
+   }
 }
+
 ?>

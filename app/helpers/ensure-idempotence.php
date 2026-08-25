@@ -1,7 +1,7 @@
 <?php
 
    function ensureIdempotence(...$params): bool{
-      if($params[0]["newData"] == $params[0]["oldData"]) return true;
+      if($params[0]["newDatas"] == $params[0]["oldDatas"]) return true;
 
       return false;
    }
