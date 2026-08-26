@@ -13,4 +13,20 @@ if($_POST["action"] == "addPosition"){
 
    header("Location: ./admin-page.html");
 }
+
+if($_POST["action"] == "addUser"){
+   $route = new Routes();
+
+   $values = [
+      "newDatas" => $_POST,
+      "oldDatas" => ""
+   ];
+   $route->addUser($values);
+
+   unset($values); 
+   unset($route);
+   unset($_POST);
+
+   header("Location: ./admin-page.html");
+}
 ?>
