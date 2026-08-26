@@ -10,11 +10,11 @@
 
       <tr>
          <td>
-            <form action="/app/Controllers/admin-controller">
+            <form action="admin-page.php" method="POST">
                <label>
                   Usuario:
                </label>
-               <input type="text" name="user" required>
+               <input type="text" name="name" required>
 
                <br>
 
@@ -28,7 +28,7 @@
                <label>
                   Cargo: 
                </label>
-               <input type="text" name="position_interprise" required>
+               <input type="text" name="id_position_interprise" required>
 
                <br>
 
@@ -45,19 +45,23 @@
                <input type="text" name="salt">
 
                <br>
+               
+               <input type="hidden" name="action" value="addUser">
 
                <button type="submit">Criar</button>
             </form>
          </td>
 
          <td>
-            <form action="/app/Controllers/admin-controller" method='POST'>
+            <form action="admin-page.php" method='POST'>
                <label>
                   Nome do cargo: 
                </label>
-               <input type="text" required>
+               <input type="text" name="name" required>
 
                <br>
+
+               <input type="hidden" name="action" value="addPosition">
 
                <button type="submit"> Criar </button>
             </form>
