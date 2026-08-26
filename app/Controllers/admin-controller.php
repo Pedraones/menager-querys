@@ -28,6 +28,7 @@ class adminController{
       if($allParamsBeenReceived == false) return ["success" => false];
 
       $values = [
+         "success" => true,
          "newDatas" => $params[0]["newDatas"], 
          "oldDatas" => $params[0]["oldData"]
       ];

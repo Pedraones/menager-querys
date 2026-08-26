@@ -26,6 +26,26 @@ class Routes{
       if($responseAdminService == false) return false;
       return true;
    }   
-}
 
+   public function addUser($user): bool{
+      $adminController = new adminController();
+
+      $responseAdminController = $adminController->receiveParamsAddUser($user);
+
+      if($responseAdminController["success"] == false) return false;
+      
+      unset($adminController);
+
+      $adminService = new adminService();
+
+      $responseAdminService = $adminService->insertUser($user);
+      
+      if($responseAdminService == false) return false;
+
+      unset($user);
+      unset($responseAdminService);
+
+      return true;
+   }
+}
 ?>

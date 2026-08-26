@@ -13,8 +13,8 @@ class Verifications{
 
       $values = $params[0]["newDatas"];
       
-      if($values["user"] == NULL ||
-         $values["user"] == "") return false;
+      if($values["name"] == NULL ||
+         $values["name"] == "") return false;
 
       if($values["email"] == NULL ||
          $values["email"] == "") return false;
