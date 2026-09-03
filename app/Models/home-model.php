@@ -10,6 +10,7 @@ use const app\Models\secrets\USER;
 use const app\Models\secrets\PASSWORD;
 use const app\Models\secrets\HOST;
 use const app\Models\secrets\TABLE_QUERYS;
+use const app\Models\secrets\TABLE_USER;
 
 class homeModel{
    private $db;
@@ -84,6 +85,30 @@ class homeModel{
       $structuredResultToReturn = structureResponseGetAQuery($result);
       
       return $structuredResultToReturn;
+   }
+
+   public function getIdPositionInterpriseUser($idUser): int{      
+      $query = "
+         SELECT 
+            id_position_interprise 
+         FROM " . TABLE_USER;
+
+      $conditions = " 
+         WHERE id = ?
+      ";     
+      $query = $query . $conditions;
+
+      $result = $this->db->execute_query(
+         $query, [
+            $idUser
+         ]
+      );
+
+      if($result->num_rows == 0) return 0;
+
+      foreach($result AS $value){
+         return $value["id_position_interprise"];
+      }
    }
 }
 
