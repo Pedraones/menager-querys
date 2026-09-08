@@ -37,7 +37,7 @@ class homeModel{
          $queryToInsert["id_user"],
          $queryToInsert["id_position_interprise"],
          $queryToInsert["name"],
-         $queryToInsert["archive"],
+         $queryToInsert["file_query"],
          $queryToInsert["content"],
          $queryToInsert["description"],
          $queryToInsert["public_view"],
