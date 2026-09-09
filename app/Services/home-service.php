@@ -8,11 +8,6 @@ require_once $dir_root . "/app/Models/home-model.php";
 
 class homeService{
    public function insertQuery($query): bool{
-      $verifications = new Verifications();
-      $allFieldsBeenReceiveds = $verifications->receivedAllParamsToAddQuery($query["newDatas"]);
-
-      if($allFieldsBeenReceiveds == false) return false;
-
       $secret = encrypt($query["newDatas"]);
       $valuesToIdentifyIdempotence = [
          "newDatas" => $secret,
@@ -25,8 +20,6 @@ class homeService{
 
       unset($isIdempotence);
       unset($valuesToIdentifyIdempotence);
-      unset($allFieldsBeenReceiveds);
-      unset($verifications);
 
       $query = $query["newDatas"];
       
