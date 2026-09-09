@@ -31,7 +31,11 @@ class Verifications{
       return true;
    }
 
-   public function receivedAllParamsToAddQuery($query): bool{
+   public function receivedAllParamsToAddQuery($values): bool{
+      if($values["newDatas"] == NULL ||
+         $values["newDatas"] == []) return false;
+
+      $query = $values["newDatas"];
       $quantityFields = count($query);
 
       if($quantityFields != 8) return false;
