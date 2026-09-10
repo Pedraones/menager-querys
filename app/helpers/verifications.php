@@ -54,8 +54,8 @@ class Verifications{
       if($query["description"] == NULL ||
          $query["description"] == "") return false;
 
-      if($query["public_view"] == "s" ||
-         $query["public_view"] == "n") return true;
+      if($query["public_view"] == 1 ||
+         $query["public_view"] == 0) return true;
 
       if($query["referred"] == "hdk" ||
          $query["referred"] == "esus") return false;
