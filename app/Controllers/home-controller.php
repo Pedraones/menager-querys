@@ -23,21 +23,4 @@ class homeController{
    }  
 }
 
-$t = new homeController();
-
-$r = $t->receiveAllParamsToAddQuery([
-   "newDatas" => [
-      "name" => "controller home",
-      "id_user" => 5,
-      "file_query" => "pwvpeovpevṕefl",
-      "content" => "",
-      "description" => "testando controller",
-      "public_view" => "n",
-      "referred" => "hdk",
-      "code" => 13
-   ],
-   "oldDatas" => ""
-]);
-
-var_dump($r);
 ?>
