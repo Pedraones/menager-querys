@@ -45,10 +45,9 @@ class adminService{
          "password" => $params["newDatas"]["password"],
          "salt" => $params["newDatas"]["salt"]
       ];
-      
-      
-      $params["newDatas"]["password"] = encrypt($textPasswordToEncrypt);
 
+      $params["newDatas"]["id_position_interprise"] = $adminModel->getPosition($params["newDatas"]["id_position_interprise"]);      
+      $params["newDatas"]["password"] = encrypt($textPasswordToEncrypt);
 
       $adminModel->addUser($params["newDatas"]);
 
