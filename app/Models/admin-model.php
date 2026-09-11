@@ -26,7 +26,7 @@ class adminModel{
       $db->close();
    }
 
-   public function getPosition($position): bool{
+   public function getPosition($position): int{
       $db = new mysqli(
          HOST,
          USER,
@@ -35,19 +35,18 @@ class adminModel{
          PORT
       );
 
-      $query = "SELECT name FROM " . TABLE_POSITION . " WHERE name = ?";
+      $query = "SELECT id FROM " . TABLE_POSITION . " WHERE name = ?";
       
       $result = $db->execute_query($query, [$position]);
 
-      foreach($result as $row){
-         if($row["name"] == $position) return true;
-         break;
+      foreach($result AS $register){
+         return $register["id"];
       }
 
       $result->close();
       $db->close();
 
-      return false;
+      return 0;
    }
 
    public function getUser($user): bool{
@@ -118,5 +117,4 @@ class adminModel{
       unset($user);
    }
 }
-
 ?>
