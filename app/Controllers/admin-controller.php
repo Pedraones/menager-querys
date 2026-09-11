@@ -7,14 +7,14 @@ require_once $dir_root . 'app/helpers/hash.php';
 class adminController{
    public function receiveParamsAddPosition(...$params): array{
       $verify = new Verifications();
-      $allParamsBeenReceived = $verify->receivedAllParamsToAddPosition($params[0]);
+      $allParamsBeenReceived = $verify->receivedAllParamsToAddPosition($params[0]["newDatas"]);
 
       if($allParamsBeenReceived == false) return ["success" => false];
 
       $result = [
          "success" => true,
-         "newData" => $params[0]["name"],
-         "oldData" => $params[0]["oldData"]
+         "newDatas" => $params[0]["newDatas"]["name"],
+         "oldDatas" => $params[0]["oldDatas"]
       ];
 
       return $result;
