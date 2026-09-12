@@ -87,6 +87,19 @@ class homeModel{
       return $structuredResultToReturn;
    }
 
+   public function getQuerysPublicView(): array{
+      $query = "SELECT name, archive, content, description, code_referred_ESUS, code_referred_HDK FROM querys WHERE public_view = 1";
+      
+      $result = $this->db->query($query);
+
+      $result = structureResponseGetQuerysPublicOrNot($result);
+
+      unset($query);
+      unset($this->db);
+
+      return $result;
+   }
+
    public function getIdPositionInterpriseUser($idUser): int{      
       $query = "
          SELECT 
