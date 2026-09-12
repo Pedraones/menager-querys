@@ -34,8 +34,8 @@ class homeService{
 
       $query["createdAt"] = $thisMoment->format("Y-m-d H:i:s");
 
-      if($query["referred"] == "HDK") {
-         $query["code_referred_HDK"] == $query["code"];
+      if(substr_compare($query["referred"], "hdk", 0, 3) == 0) {
+         $query["code_referred_HDK"] = $query["code"];
 
          unset($query["referred"]);
          unset($query["code"]);
