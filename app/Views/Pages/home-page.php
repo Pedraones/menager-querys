@@ -22,12 +22,15 @@ if($_POST["action"] == "addQuery"){
    $route = new Routes();
 
    $_POST["id_user"] = 1;
+   $_POST["id_position_interprise_user"] = 4;
+   unset($_POST["action"]);
+
    $values = [
       "newDatas" => $_POST,
       "oldDatas" => ""
    ];
    $route->addQuery($values);
-
+    
    unset($values);
    unset($route);
 
