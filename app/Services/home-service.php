@@ -47,6 +47,22 @@ class homeService{
          unset($query["code"]);
       }
 
+      $querysExists = $homeModel->getAQuery([
+         "name" => "pedro",
+         "id_user" => 1,
+         "id_position_interprise_user" => 3,
+         "description" => "aaaa",
+         "code_referred_HDK" => 1,
+         "public_view" => 1
+      ]);
+
+      if(count($querysExists) > 0){
+         for($number = 0; $number < count($querysExists); $number++){
+            if($querysExists[$number]["archive"] == $query["file_query"]) return false;
+            if($querysExists[$number]["content"] == $query["content"]) return false;
+         }
+      }
+         
       $homeModel->addQuery($query);
 
       unset($homeModel);
