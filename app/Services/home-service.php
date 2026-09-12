@@ -34,8 +34,8 @@ class homeService{
 
       $query["createdAt"] = $thisMoment->format("Y-m-d H:i:s");
 
-      if($query["referred"] == "HDK") {
-         $query["code_referred_HDK"] == $query["code"];
+      if(substr_compare($query["referred"], "hdk", 0, 3) == 0) {
+         $query["code_referred_HDK"] = $query["code"];
 
          unset($query["referred"]);
          unset($query["code"]);
@@ -47,6 +47,22 @@ class homeService{
          unset($query["code"]);
       }
 
+      $querysExists = $homeModel->getAQuery([
+         "name" => "pedro",
+         "id_user" => 1,
+         "id_position_interprise_user" => 3,
+         "description" => "aaaa",
+         "code_referred_HDK" => 1,
+         "public_view" => 1
+      ]);
+
+      if(count($querysExists) > 0){
+         for($number = 0; $number < count($querysExists); $number++){
+            if($querysExists[$number]["archive"] == $query["file_query"]) return false;
+            if($querysExists[$number]["content"] == $query["content"]) return false;
+         }
+      }
+         
       $homeModel->addQuery($query);
 
       unset($homeModel);

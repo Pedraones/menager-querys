@@ -38,7 +38,7 @@ class Verifications{
       $query = $values["newDatas"];
       $quantityFields = count($query);
 
-      if($quantityFields != 8) return false;
+      if($quantityFields < 8) return false;
 
       if($query["id_user"] == NULL) return false;
 
@@ -54,11 +54,10 @@ class Verifications{
       if($query["description"] == NULL ||
          $query["description"] == "") return false;
 
-      if($query["public_view"] == 1 ||
-         $query["public_view"] == 0) return true;
+      if($query["public_view"] > 1 ) return false;
 
-      if($query["referred"] == "hdk" ||
-         $query["referred"] == "esus") return false;
+      if(substr_compare($query["referred"], "hdk", 1, 3) == 0 ||
+         substr_compare($query["referred"], "esus", 1, 4) == 0) return false;
 
       if($query["code"] == NULL) return false;
 

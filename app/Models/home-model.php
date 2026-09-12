@@ -33,7 +33,7 @@ class homeModel{
       );
 
       $mountQuery->bind_param(
-         "iisbssiiis",
+         "iissssiiis",
          $queryToInsert["id_user"],
          $queryToInsert["id_position_interprise"],
          $queryToInsert["name"],
