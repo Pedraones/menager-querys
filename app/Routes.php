@@ -54,7 +54,7 @@ class Routes{
 
       $responseHomeController = $homeController->receiveAllParamsToAddQuery($query);
 
-      if($responseHomeController == false) return false;
+      if($responseHomeController["success"] == false) return false;
 
       unset($homeController);
 
