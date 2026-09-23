@@ -44,6 +44,39 @@ class userModel{
       return true;
    }
 
+   public function getLoginUser($user): bool{
+      $connection = new connectionDB();
+      $db = $connection->startConnection();
+      
+      $query = "
+         SELECT 
+            1
+         FROM " . TABLE_USER;
+
+      $conditions = " 
+         WHERE email = ?
+         AND   password = ?
+      ";     
+      $query = $query . $conditions;
+
+      $result = $db->execute_query(
+         $query, [ 
+            $user["email"],  
+            $user["password"]
+         ]
+      );
+
+      unset($db);
+      unset($connection);
+      unset($query);
+      unset($conditions);
+      unset($user);
+
+      if($result->num_rows == 0) return false;
+
+      return true;
+   }
+
    public function addUser($user){
       $connection = new connectionDB();
       $db = $connection->startConnection();
