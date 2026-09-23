@@ -20,7 +20,18 @@ class homeController{
          "oldDatas" => $query["oldDatas"]
       ];
       return $result;
-   }  
+   } 
+
+   public function receiveAllParamsToViewQuerys($positionInterprise): array{
+      if(gettype($positionInterprise) != integer) $positionInterprise = null;
+
+      $result = [
+         "success" => true,
+         "data" => $positionInterprise
+      ];
+
+      return $result;
+   }
 }
 
 ?>

@@ -87,6 +87,51 @@ class homeModel{
       return $structuredResultToReturn;
    }
 
+   public function getQuerysPublicView(): array{
+      $query = "
+         SELECT 
+            name, 
+            archive, 
+            content, 
+            description, 
+            code_referred_ESUS,
+            code_referred_HDK 
+         FROM querys 
+         WHERE public_view = 1";
+      
+      $result = $this->db->query($query);
+
+      $result = structureResponseGetQuerysPublicOrNot($result);
+
+      unset($query);
+      unset($this->db);
+
+      return $result;
+   }
+
+   public function getQuerysNotPublicView($id_position_interprise_user): array{
+      $query = "
+         SELECT 
+            name, 
+            archive, 
+            content, 
+            description,
+            code_referred_ESUS, 
+            code_referred_HDK 
+         FROM querys 
+         WHERE id_position_interprise_user = ?
+         AND   public_view = 0";
+
+      $result = $this->db->execute_query($query, [$id_position_interprise_user]);
+
+      $result = structureResponseGetQuerysPublicOrNot($result);
+
+      unset($query);
+      unset($this->db);
+
+      return $result;
+   }
+
    public function getIdPositionInterpriseUser($idUser): int{      
       $query = "
          SELECT 
@@ -111,5 +156,4 @@ class homeModel{
       }
    }
 }
-
 ?>

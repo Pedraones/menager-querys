@@ -69,6 +69,15 @@ class Routes{
 
       return true;
    }
+
+   public function listQuerys($positionInterprise = null): array{
+      $homeService = new homeService();
+      $responseHomeService = $homeService->getQuerys($positionInterprise);
+      
+      unset($homeService);
+
+      return $responseHomeService;
+   }
 }
 
 ?>

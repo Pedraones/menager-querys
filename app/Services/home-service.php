@@ -70,6 +70,29 @@ class homeService{
       unset($idPositionInterpriseUser);
 
       return true;
+   }
+
+   public function getQuerys($id_position_interprise_user): array{
+      $homeModel = new homeModel();
+
+      $querysPublic = $homeModel->getQuerysPublicView();
+
+      $homeModel = new homeModel();
+      $querysNotPublic = $homeModel->getQuerysNotPublicView($id_position_interprise_user);
+      $querys = [];
+      
+      $qtdQuerysPublic = count($querysPublic);
+      $qtdQuerysNotPublic = count($querysNotPublic);
+
+      for($position = 0; $position < $qtdQuerysPublic; $position++){
+         $querys[$position] = $querysPublic[$position];
+      }
+      for($position = 1; $position <= $qtdQuerysNotPublic; $position++){
+         $querys[$qtdQuerysPublic + $position] = $querysNotPublic[$position];
+      }
+
+      return $querys;
    } 
 }
+
 ?>
