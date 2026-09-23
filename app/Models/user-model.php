@@ -44,25 +44,23 @@ class userModel{
       return true;
    }
 
-   public function getLoginUser($user): bool{
+   public function getSaltUser($user): object{
       $connection = new connectionDB();
       $db = $connection->startConnection();
       
       $query = "
          SELECT 
-            1
+            salt
          FROM " . TABLE_USER;
 
       $conditions = " 
          WHERE email = ?
-         AND   password = ?
       ";     
       $query = $query . $conditions;
 
       $result = $db->execute_query(
          $query, [ 
-            $user["email"],  
-            $user["password"]
+            $user["email"]
          ]
       );
 
@@ -72,9 +70,7 @@ class userModel{
       unset($conditions);
       unset($user);
 
-      if($result->num_rows == 0) return false;
-
-      return true;
+      return $result;
    }
 
    public function addUser($user){

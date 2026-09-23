@@ -23,4 +23,14 @@ function structureResponseGetQuerysPublicOrNot($response): array{
 
    return $result;
 }
+
+function structureResponseGetSalt($response): string{
+   $result = "";
+
+   foreach($response AS $key => $value){
+      $result[$key] = $value;
+   }
+
+   return $result;
+}
 ?>
