@@ -9,10 +9,34 @@
       </tr>
 
       <tr>
-         <td></td>
+         <td>
+            <?php
+               $dir_root = getenv("dir_menager_querys");      
+               require_once $dir_root . "app/Routes.php";
+
+               $route = new Routes();
+
+               $querys = $route->listQuerys();
+
+               for($count = 0; $count < count($querys); $count++){
+                  echo "Nome: " . $querys[$count]["name"];
+                  echo "<br>";
+                  echo "Descrição: " . $querys[$count]["description"] . "<br>";
+
+                  if($querys[$count]["content"] != null) echo "Conteúdo: " . $querys[$count]["content"] . "<br>";
+                  if($querys[$count]["archive"] != null) echo "Arquivo: <a href='#'>LINK</a>";
+                  
+                  if($querys[$count]["code_referred_HDK"] != null) echo "<br>Código: HDK-" . $querys[$count]['code_referred_HDK'];
+                  if($querys[$count]["code_referred_ESUS"] != null) echo "<br>Código: ESUS-". $querys[$count]["code_referred_ESUS"];
+                  
+                  echo "<br>";
+               }
+            ?>
+         </td>
 
          <td>
-            <form action="" method='POST'>
+            <form action="./home-page.php" method='POST' enctype="multipart/form-data">
+               <input type="hidden" name="action" value="addQuery">
                <label>
                   Nome:
                </label>
@@ -45,8 +69,8 @@
                   Todos podem visualizar o arquivo ? (caso não, apenas usuarios do mesmo cargo/area poderão visualizar):
                </label>
                <select name="public_view">
-                  <option value="sim">Sim</option>
-                  <option value="nao">Não</option>
+                  <option value=1>Sim</option>
+                  <option value=0>Não</option>
                </select>
 
                <br>
@@ -59,6 +83,8 @@
                   <option value="esus">ESUS</option>
                </select>
                <input type="number" name="code">
+
+               <button type="submit">Adicionar</button>
             </form>
          </td>
       </tr>

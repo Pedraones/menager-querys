@@ -1,7 +1,8 @@
 <?php
 require_once __DIR__ . "/Controllers/admin-controller.php";
+require_once __DIR__ . "/Controllers/home-controller.php";
 require_once __DIR__ . "/Services/admin-service.php";
-require_once __DIR__ . "/Models/admin-model.php";
+require_once __DIR__ . "/Services/home-service.php";
 
 class Routes{
    public function addPosition($params): bool{
@@ -47,5 +48,36 @@ class Routes{
 
       return true;
    }
+
+   public function addQuery($query): bool{
+      $homeController = new homeController();
+
+      $responseHomeController = $homeController->receiveAllParamsToAddQuery($query);
+
+      if($responseHomeController["success"] == false) return false;
+
+      unset($homeController);
+
+      $homeService = new homeService();
+
+      $responseHomeService = $homeService->insertQuery($query);
+
+      if($responseHomeService == false) return false;
+
+      unset($responseHomeService);
+      unset($homeService);
+
+      return true;
+   }
+
+   public function listQuerys($positionInterprise = null): array{
+      $homeService = new homeService();
+      $responseHomeService = $homeService->getQuerys($positionInterprise);
+      
+      unset($homeService);
+
+      return $responseHomeService;
+   }
 }
+
 ?>

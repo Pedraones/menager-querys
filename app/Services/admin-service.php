@@ -1,23 +1,26 @@
 <?php
-
 $dir_root = getenv('dir_menager_querys');
 require_once $dir_root . "app/helpers/ensure-idempotence.php";
 require_once $dir_root . "app/helpers/hash.php";
-require_once $dir_root . "app/Models/admin-model.php";
+require_once $dir_root . "app/Models/position-interprise-model.php";
+require_once $dir_root . "app/Models/user-model.php";
 
 class adminService{
    public function insertPosition($params): bool{
       if(ensureIdempotence($params) == true) return false;
          
-      $adminModel = new adminModel();
+      $positionInterpriseModel = new positionInterpriseModel();
 
-      $position = $params["newData"];
-      $existPosition = $adminModel->getPosition($position);
+      $position = $params["newDatas"];
+      $existPosition = $positionInterpriseModel->getPosition($position);
 
-      if($existPosition == true) return false;
+      if($existPosition != 0) return false;
 
-      $adminModel->addPosition($position);
-      
+      $positionInterpriseModel->addPosition($position);
+
+      unset($positionInterpriseModel);
+      unset($existPosition);
+
       return true;
    }
 
@@ -35,9 +38,9 @@ class adminService{
 
       unset($valuesToIdentifieIdempotence);
 
-      $adminModel = new adminModel();
+      $userModel = new userModel();
 
-      $existUser = $adminModel->getUser($params["newDatas"]);
+      $existUser = $userModel->getUser($params["newDatas"]);
 
       if($existUser == true) return false;
 
@@ -45,16 +48,17 @@ class adminService{
          "password" => $params["newDatas"]["password"],
          "salt" => $params["newDatas"]["salt"]
       ];
-      
-      
+
+      $positionInterpriseModel = new positionInterpriseModel();
+
+      $params["newDatas"]["id_position_interprise"] = $positionInterpriseModel->getPosition($params["newDatas"]["id_position_interprise"]);      
       $params["newDatas"]["password"] = encrypt($textPasswordToEncrypt);
 
-
-      $adminModel->addUser($params["newDatas"]);
+      $userModel->addUser($params["newDatas"]);
 
       unset($params);
       unset($textPasswordToEncrypt);
-      unset($adminModel);
+      unset($userModel);
 
       return true;
    }
