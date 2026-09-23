@@ -9,7 +9,30 @@
       </tr>
 
       <tr>
-         <td></td>
+         <td>
+            <?php
+               $dir_root = getenv("dir_menager_querys");      
+               require_once $dir_root . "app/Routes.php";
+
+               $route = new Routes();
+
+               $querys = $route->listQuerys();
+
+               for($count = 0; $count < count($querys); $count++){
+                  echo "Nome: " . $querys[$count]["name"];
+                  echo "<br>";
+                  echo "Descrição: " . $querys[$count]["description"] . "<br>";
+
+                  if($querys[$count]["content"] != null) echo "Conteúdo: " . $querys[$count]["content"] . "<br>";
+                  if($querys[$count]["archive"] != null) echo "Arquivo: <a href='#'>LINK</a>";
+                  
+                  if($querys[$count]["code_referred_HDK"] != null) echo "<br>Código: HDK-" . $querys[$count]['code_referred_HDK'];
+                  if($querys[$count]["code_referred_ESUS"] != null) echo "<br>Código: ESUS-". $querys[$count]["code_referred_ESUS"];
+                  
+                  echo "<br>";
+               }
+            ?>
+         </td>
 
          <td>
             <form action="./home-page.php" method='POST' enctype="multipart/form-data">
