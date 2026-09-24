@@ -28,7 +28,7 @@ function structureResponseGetSalt($response): string{
    $result = "";
 
    foreach($response AS $key => $value){
-      $result[$key] = $value;
+      $result = $value["salt"];
    }
 
    return $result;
