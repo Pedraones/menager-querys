@@ -18,8 +18,6 @@ class authService{
          "salt" => $saltUser
       ]);
 
-      var_dump($passwordEncrypt);
-
       unset($saltUser);
       $credentials["password"] = $passwordEncrypt;
 
