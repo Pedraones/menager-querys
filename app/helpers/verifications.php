@@ -63,6 +63,16 @@ class Verifications{
 
       return true;
    }
+
+   public function receivedAllParamsToLogin($credentials): bool{
+      if($credentials["email"] == NULL ||
+         $credentials["email"] == "") return false;
+      
+      if($credentials["password"] == NULL ||
+         $credentials["password"] == "") return false;
+
+      return true;
+   }
 }
 
 ?>
