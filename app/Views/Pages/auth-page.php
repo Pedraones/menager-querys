@@ -1,5 +1,6 @@
 <?php
 $dir_root = getenv("dir_menager_querys");
+require_once $dir_root . "/app/helpers/hash.php";
 require_once $dir_root . "/app/Routes.php";
 
 $routes = new Routes();
@@ -10,5 +11,13 @@ $credentials = [
 ];
 $success = $routes->login($credentials);
 if(!$success) header("Location: ./auth-page.html");
-else header("Location: ./view-home-page.php");
+else{
+   $salt = "" . time();
+   $credentials["salt"] = $salt;
+   $loginEcrypted = encrypt($credentials);
+   
+   #setcookie("login", $loginEcrypted, time()+36000);
+
+   #header("Location: ./view-home-page.php");
+}
 ?>
