@@ -16,8 +16,8 @@
 
                $route = new Routes();
 
-               $querys = $route->listQuerys();
-
+               $querys = $route->listQuerys($_COOKIE["position_interprise"]);
+               
                for($count = 0; $count < count($querys); $count++){
                   echo "Nome: " . $querys[$count]["name"];
                   echo "<br>";
