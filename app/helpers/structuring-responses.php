@@ -23,4 +23,24 @@ function structureResponseGetQuerysPublicOrNot($response): array{
 
    return $result;
 }
+
+function structureResponseGetSalt($response): string{
+   $result = "";
+
+   foreach($response AS $key => $value){
+      $result = $value["salt"];
+   }
+
+   return $result;
+}
+
+function structureResponseGetPositionInterpriseUser($response): int{
+   $result = 0;
+   #var_dump($response);
+   foreach($response AS $key => $value){
+      $result = $value["id_position_interprise"];
+   }
+
+   return $result;
+}
 ?>

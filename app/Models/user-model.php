@@ -44,6 +44,99 @@ class userModel{
       return true;
    }
 
+   public function getSaltUser($user): object{
+      $connection = new connectionDB();
+      $db = $connection->startConnection();
+      
+      $query = "
+         SELECT 
+            salt
+         FROM " . TABLE_USER;
+
+      $conditions = " 
+         WHERE email = ?
+      ";     
+      $query = $query . $conditions;
+
+      $result = $db->execute_query(
+         $query, [ 
+            $user["email"]
+         ]
+      );
+
+      unset($db);
+      unset($connection);
+      unset($query);
+      unset($conditions);
+      unset($user);
+
+      return $result;
+   }
+
+   public function getLoginUser($credentials): bool{
+      $connection = new connectionDB();
+      $db = $connection->startConnection();
+      
+      $query = "
+         SELECT 
+            1 
+         FROM " . TABLE_USER;
+
+      $conditions = " 
+         WHERE email = ?
+         AND   password = ?
+      ";     
+      $query = $query . $conditions;
+
+      $result = $db->execute_query(
+         $query, [ 
+            $credentials["email"],  
+            $credentials["password"]
+         ]
+      );
+
+      unset($db);
+      unset($connection);
+      unset($query);
+      unset($conditions);
+      unset($credentials);
+
+      if($result->num_rows == 0 || $result->num_rows > 1) return false;
+
+      return true;
+   }
+
+   public function getPositionInterpriseUser($user): object{
+      $connection = new connectionDB();
+      $db = $connection->startConnection();
+      
+      $query = "
+         SELECT   
+            id_position_interprise 
+         FROM " . TABLE_USER;
+
+      $conditions = " 
+         WHERE email = ?
+         AND   password = ?
+      ";     
+      $query = $query . $conditions;
+
+      $result = $db->execute_query(
+         $query, [ 
+            $user["email"],
+            $user["password"]
+         ]
+      );
+
+      unset($db);
+      unset($connection);
+      unset($query);
+      unset($conditions);
+      unset($user);
+
+      return $result;
+   }
+
    public function addUser($user){
       $connection = new connectionDB();
       $db = $connection->startConnection();
@@ -69,5 +162,6 @@ class userModel{
       unset($building_query);
       unset($user);
    }
+
 }
 ?>

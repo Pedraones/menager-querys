@@ -1,8 +1,10 @@
 <?php
 require_once __DIR__ . "/Controllers/admin-controller.php";
 require_once __DIR__ . "/Controllers/home-controller.php";
+require_once __DIR__ . "/Controllers/auth-controller.php";
 require_once __DIR__ . "/Services/admin-service.php";
 require_once __DIR__ . "/Services/home-service.php";
+require_once __DIR__ . "/Services/auth-service.php";
 
 class Routes{
    public function addPosition($params): bool{
@@ -78,6 +80,25 @@ class Routes{
 
       return $responseHomeService;
    }
-}
 
+   public function login($credentials): bool{
+      $authController = new authController();
+      $responseAuthController = $authController->receivedParamsToLogin($credentials);
+
+      if(!$responseAuthController["success"]) return false;
+
+      unset($authController);
+      unset($responseAuthController);
+
+      $authService = new authService();
+      $responseAuthService = $authService->login($credentials);
+      unset($authService);
+
+      if(!$responseAuthService) return false;
+      setcookie("position_interprise", $responseAuthService["position_interprise"], time()+360);
+      unset($responseAuthService);
+
+      return true;
+   }
+}
 ?>
