@@ -33,4 +33,14 @@ function structureResponseGetSalt($response): string{
 
    return $result;
 }
+
+function structureResponseGetPositionInterpriseUser($response): int{
+   $result = 0;
+   #var_dump($response);
+   foreach($response AS $key => $value){
+      $result = $value["id_position_interprise"];
+   }
+
+   return $result;
+}
 ?>
