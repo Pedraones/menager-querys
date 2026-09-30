@@ -106,6 +106,37 @@ class userModel{
       return true;
    }
 
+   public function getPositionInterpriseUser($user): object{
+      $connection = new connectionDB();
+      $db = $connection->startConnection();
+      
+      $query = "
+         SELECT   
+            id_position_interprise 
+         FROM " . TABLE_USER;
+
+      $conditions = " 
+         WHERE email = ?
+         AND   password = ?
+      ";     
+      $query = $query . $conditions;
+
+      $result = $db->execute_query(
+         $query, [ 
+            $user["email"],
+            $user["password"]
+         ]
+      );
+
+      unset($db);
+      unset($connection);
+      unset($query);
+      unset($conditions);
+      unset($user);
+
+      return $result;
+   }
+
    public function addUser($user){
       $connection = new connectionDB();
       $db = $connection->startConnection();
