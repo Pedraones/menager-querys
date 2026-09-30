@@ -12,12 +12,10 @@ $credentials = [
 $success = $routes->login($credentials);
 if(!$success) header("Location: ./auth-page.html");
 else{
-   $salt = "" . time();
-   $credentials["salt"] = $salt;
    $loginEcrypted = encrypt($credentials);
    
-   #setcookie("login", $loginEcrypted, time()+36000);
+   setcookie("login", $loginEcrypted, time()+360);
 
-   #header("Location: ./view-home-page.php");
+   header("Location: ./view-home-page.php");
 }
 ?>
