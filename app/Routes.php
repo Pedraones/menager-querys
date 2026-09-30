@@ -92,11 +92,10 @@ class Routes{
 
       $authService = new authService();
       $responseAuthService = $authService->login($credentials);
-
       unset($authService);
 
       if(!$responseAuthService) return false;
-
+      setcookie("position_interprise", $responseAuthService["position_interprise"], time()+360);
       unset($responseAuthService);
 
       return true;
