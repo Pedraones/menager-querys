@@ -96,6 +96,9 @@ class Routes{
 
       if(!$responseAuthService) return false;
       setcookie("position_interprise", $responseAuthService["position_interprise"], time()+360);
+      if($responseAuthService["is_admin"] == 1){
+         setcookie("is_admin", "1", time()+360);
+      }
       unset($responseAuthService);
 
       return true;
