@@ -34,6 +34,16 @@ function structureResponseGetSalt($response): string{
    return $result;
 }
 
+function structureResponseGetUserIsAdmin($response): string{
+   $result = "";
+
+   foreach($response AS $key => $value){
+      $result = $value["is_admin"];
+   }
+
+   return $result;
+}
+
 function structureResponseGetPositionInterpriseUser($response): int{
    $result = 0;
    

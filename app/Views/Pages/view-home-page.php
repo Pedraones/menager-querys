@@ -1,6 +1,9 @@
 <link rel="stylesheet" href="../Styles/home-styles.css">
 
 <body>
+   <?php
+      if($_COOKIE["is_admin"] == "1") echo "<a href='./admin-page.html'>Administração</a>";
+   ?>
    <table>
 
       <tr>
