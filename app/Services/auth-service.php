@@ -38,7 +38,7 @@ class authService{
 
       $userModel = new userModel();
       $isAdmin = $userModel->getUserIsAdmin($credentials);
-      
+      $isAdmin = structureResponseGetUserIsAdmin($isAdmin);
       unset($userModel);
 
       return [
