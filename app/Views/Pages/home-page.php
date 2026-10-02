@@ -2,6 +2,7 @@
 $dir_root = getenv('dir_menager_querys');
 
 require_once $dir_root . "/app/Routes.php";
+require_once $dir_root . "/app/helpers/structuring-responses.php";
 
 $fileUploaded = is_uploaded_file($_FILES["file_query"]["tmp_name"]);
 if($fileUploaded == true){
@@ -10,11 +11,14 @@ if($fileUploaded == true){
 
    move_uploaded_file($temp_name, $dir_root . "/app/temp/" . $name);
 
-   $file_content = file_get_contents("$dir_root/app/temp/$name", false);
+   $fileContentBrute = file("$dir_root/app/temp/$name");
    
-   $_POST["file_query"] = $file_content;
+   $fileContentAdjusted = strucutureContentOfFileQueryToInsertInDB($fileContentBrute);
+   
+   $_POST["file_query"] = $fileContentAdjusted;
 
-   unset($file_content);
+   unset($fileContentAdjusted);
+   unset($fileContentBrute);
    unlink($dir_root . "app/temp/" . $name);
 }
 
