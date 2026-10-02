@@ -36,11 +36,27 @@ function structureResponseGetSalt($response): string{
 
 function structureResponseGetPositionInterpriseUser($response): int{
    $result = 0;
-   #var_dump($response);
+   
    foreach($response AS $key => $value){
       $result = $value["id_position_interprise"];
    }
 
    return $result;
+}
+
+function strucutureContentOfFileQueryToInsertInDB($fileContent): string{
+   $stringContent = "";
+   
+   foreach ($fileContent as $line) {
+      $line = $line . "<br>";
+      $stringContent = $stringContent . $line;
+   }
+   return $stringContent;
+}   
+
+function structureContentOfFileQueryToDownload($fileContent): array{
+   $lines = explode("<br>", $fileContent);
+   
+   return $lines;
 }
 ?>
