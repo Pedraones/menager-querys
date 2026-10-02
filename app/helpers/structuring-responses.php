@@ -43,6 +43,7 @@ function structureResponseGetPositionInterpriseUser($response): int{
 
    return $result;
 }
+
 function strucutureContentOfFileQueryToInsertInDB($fileContent): string{
    $stringContent = "";
    
@@ -52,4 +53,10 @@ function strucutureContentOfFileQueryToInsertInDB($fileContent): string{
    }
    return $stringContent;
 }   
+
+function structureContentOfFileQueryToDownload($fileContent): array{
+   $lines = explode("<br>", $fileContent);
+   
+   return $lines;
+}
 ?>
