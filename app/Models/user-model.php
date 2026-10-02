@@ -137,6 +137,37 @@ class userModel{
       return $result;
    }
 
+   public function getUserIsAdmin($credentials){
+      $connection = new connectionDB();
+      $db = $connection->startConnection();
+      
+      $query = "
+         SELECT   
+            is_admin
+         FROM " . TABLE_USER;
+
+      $conditions = " 
+         WHERE email = ?
+         AND   password = ?
+      ";     
+      $query = $query . $conditions;
+
+      $result = $db->execute_query(
+         $query, [ 
+            $credentials["email"],
+            $credentials["password"]
+         ]
+      );
+
+      unset($db);
+      unset($connection);
+      unset($query);
+      unset($conditions);
+      unset($user);
+
+      return $result;
+   }
+
    public function addUser($user){
       $connection = new connectionDB();
       $db = $connection->startConnection();
@@ -162,6 +193,5 @@ class userModel{
       unset($building_query);
       unset($user);
    }
-
 }
 ?>
