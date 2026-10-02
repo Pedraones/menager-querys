@@ -24,8 +24,24 @@
                   echo "Descrição: " . $querys[$count]["description"] . "<br>";
 
                   if($querys[$count]["content"] != null) echo "Conteúdo: " . $querys[$count]["content"] . "<br>";
-                  if($querys[$count]["archive"] != null) echo "Arquivo: <a href='#'>LINK</a>";
-                  
+
+                  if($querys[$count]["archive"] != null){
+                     $archive = $dir_root . "app/temp/" . $querys[$count]["name"] . ".sql";
+                    
+                     touch($archive);
+                     $openedFile = fopen($archive, "r+");
+                     
+                     foreach($querys[$count]["archive"] as $t => $line) {
+                        fwrite($openedFile, $line);
+                     }
+
+                     fclose($openedFile);
+                     
+                     $pathFile = "../../temp/" . $querys[$count]["name"] . ".sql";
+                     $nameFile = $querys[$count]["name"];
+                     echo "Arquivo: <a href='$pathFile' download>Baixar</a>";
+                  }
+
                   if($querys[$count]["code_referred_HDK"] != null) echo "<br>Código: HDK-" . $querys[$count]['code_referred_HDK'];
                   if($querys[$count]["code_referred_ESUS"] != null) echo "<br>Código: ESUS-". $querys[$count]["code_referred_ESUS"];
                   
