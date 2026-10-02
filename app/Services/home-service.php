@@ -4,6 +4,7 @@ $dir_root = getenv("dir_menager_querys");
 require_once $dir_root . "/app/helpers/verifications.php";
 require_once $dir_root . "/app/helpers/hash.php";
 require_once $dir_root . "/app/helpers/ensure-idempotence.php";
+require_once $dir_root . "/app/helpers/structuring-responses.php";
 require_once $dir_root . "/app/Models/home-model.php";
 
 class homeService{
@@ -86,11 +87,13 @@ class homeService{
 
       for($position = 0; $position < $qtdQuerysPublic; $position++){
          $querys[$position] = $querysPublic[$position];
+         $querys[$position]["archive"] = structureContentOfFileQueryToDownload($querys[$position]["archive"]);
       }
       for($position = 1; $position <= $qtdQuerysNotPublic; $position++){
-         $querys[$qtdQuerysPublic + $position] = $querysNotPublic[$position];
+            $querys[$qtdQuerysPublic + $position] = $querysNotPublic[$position];
+            $querys[$position]["archive"] = structureContentOfFileQueryToDownload($querys[$position]["archive"]);
       }
-
+            
       return $querys;
    } 
 }
