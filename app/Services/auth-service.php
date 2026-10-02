@@ -34,9 +34,17 @@ class authService{
       
       $responsePositionInterpriseUser = structureResponseGetPositionInterpriseUser($responsePositionInterpriseUser);
 
+      unset($userModel);
+
+      $userModel = new userModel();
+      $isAdmin = $userModel->getUserIsAdmin($credentials);
+      
+      unset($userModel);
+
       return [
          "success" => true,
-         "position_interprise" => $responsePositionInterpriseUser
+         "position_interprise" => $responsePositionInterpriseUser,
+         "is_admin" => $isAdmin
       ];
    }
 }
